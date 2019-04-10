@@ -90,15 +90,14 @@ private:
 	};
 
 	int16_t const* waveTables[8] {
+	    wave0,
 	    wave1,
 	    wave2,
 	    wave3,
 	    wave4,
-
-	    wave9,
-	    wave10,
-	    wave11,
-	    wave12
+	    wave5,
+	    wave6,
+	    wave7
 	};
 
 	// Target note of each oscillator
