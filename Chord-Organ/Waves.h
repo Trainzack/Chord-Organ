@@ -271,7 +271,7 @@ const int16_t wave8[257] = {
   -32000,-31513,-30894,-29781,-28330,-24057,-10879,2808
 };
 
-// SAWhttps://github.com/DatanoiseTV/AKWF_WaveForms/blob/master/AKWF_vgsaw.h#L345
+// SAW https://github.com/DatanoiseTV/AKWF_WaveForms/blob/master/AKWF_vgsaw.h#L345
 const int16_t wave9[257] = {
   171,970,757,1165,1970,2206,2065,2183,2050,
   2469,2531,2659,3454,3322,3873,4365,4181,4811,5553,
