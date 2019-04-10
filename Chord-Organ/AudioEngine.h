@@ -90,10 +90,10 @@ private:
 	};
 
 	int16_t const* waveTables[8] {
-	    wave5,
-	    wave6,
-	    wave7,
-	    wave8,
+	    wave1,
+	    wave2,
+	    wave3,
+	    wave4,
 
 	    wave9,
 	    wave10,
