@@ -1,27 +1,26 @@
-#ifndef Trig_h
-#define Trig_h
+#ifndef ClockIn_h
+#define ClockIn_h
 
 #include <Bounce2.h>
 
-#define TRIG_LED 11
-#define TRIG_CV 9
+#define CLOCK_LED 11
 
-class Trig {
+class ClockIn {
 	public:
-		Trig() : trigCV(TRIG_CV,40) {
+		/*ClockIn() : ClockCV(CLOCK_CV,40) {
 
-		};
+		};*/
 		void init();
 		void led(boolean high);
 		void out(boolean high);
 		void update();
 
 	private:
-		Bounce trigCV;
+		Bounce ClockCV;
 		elapsedMillis pulseOutTimer = 0;
 		uint32_t pulseTime = 10;
 		boolean pulseHigh = false;
-
+    boolean pulseDetected = false;
 		boolean resetButton = false;
 		boolean resetCVRose = false;
 		elapsedMillis resetLedTimer = 0;
