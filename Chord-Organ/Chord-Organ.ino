@@ -14,7 +14,7 @@
 #include "AudioEngine.h"
 #include "AnalogInput.h"
 #include "Interface.h"
-#include "ClockIn.h"
+#include "Trig.h"
 
 //#define REQUIRE_SD_CARD
 
@@ -40,7 +40,7 @@ Settings settings("CHORDORG.TXT");
 Tuning tuning("TUNING.SCL");
 LedControl ledControl;
 Interface interface;
-ClockIn clockIn;
+Trig trig;
 
 void setup(){
 #ifdef DEBUG_STARTUP
@@ -53,7 +53,7 @@ Serial.println("Starting");
     SPI.setSCK(14);
 
 	ledControl.init();
-    clockIn.init();
+    trig.init();
 
 #ifdef REQUIRE_SD_CARD
     openSDCard(true);
@@ -112,7 +112,7 @@ void loop(){
 
     uint16_t state = interface.update();
 
-    clockIn.update();
+    trig.update();
 
 	int notesUpdate = state & (ROOT_NOTE_UPDATE | CHORD_INDEX_CHANGED);
 	int buttonShortPress = state & BUTTON_SHORT_PRESS;
@@ -142,7 +142,7 @@ void loop(){
     }
 
     if (buttonShortPress || notesUpdate)  {
-        clockIn.out(true);
+        trig.out(true);
     }
 
     if(state || audioEngine.gliding) {

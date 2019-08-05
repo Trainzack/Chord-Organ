@@ -2,25 +2,11 @@
 
 #include "Arduino.h"
 
-//#define DEBUG_CLOCK_CYCLE_WAVE
-
-// SETUP VARS TO STORE CONTROLS
-// A separate variable for tracking clock CV only
-volatile boolean clockCVHigh = false;
-
-void clockcv() {
-  clockCVHigh = true;
-}
-
 void Interface::init(Settings* settings) {
 
     analogReadRes(ADC_BITS);
     pinMode(WAVEFORM_BUTTON, INPUT);
-  
-  pinMode(CLOCK_CV, INPUT);
 
-  // Add an interrupt on the CLOCK_CV pin to catch rising edges
-  attachInterrupt(CLOCK_CV, clockcv, RISING);
 	uint16_t bounceInterval = 5;
 	waveButtonBounce.attach(WAVEFORM_BUTTON);
 	waveButtonBounce.interval(bounceInterval);
@@ -65,14 +51,7 @@ uint16_t Interface::updateChordControls() {
 	chordCVInput.update();
 	chordPotInput.update();
 
-	//chordIndex = (int) constrain(chordCVInput.currentValue + chordPotInput.currentValue, 0, chordCount - 1);
-  #ifndef DEBUG_CLOCK_CYCLE_WAVE
-  if (clockCVHigh) {
-    chordIndex = (chordIndex + 1) % chordCount;
-    clockCVHigh = false;
-  }
-  #endif
-
+	chordIndex = (int) constrain(chordCVInput.currentValue + chordPotInput.currentValue, 0, chordCount - 1);
 
 	uint16_t chordChanged = 0;
 
@@ -155,13 +134,6 @@ uint16_t Interface::updateButton() {
         buttonHeld = false;
         buttonTimer = 0;
     }
-
-    #ifdef DEBUG_CLOCK_CYCLE_WAVE
-    if (clockCVHigh) {
-      buttonState |= BUTTON_SHORT_PRESS;
-      clockCVHigh = false;
-    }
-    #endif
 
     if(buttonHeld) {
     	if(buttonTimer > VERY_LONG_PRESS_DURATION) {

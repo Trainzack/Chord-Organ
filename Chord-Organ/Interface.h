@@ -9,7 +9,6 @@
 #define CHORD_CV_PIN 6 // pin for Chord CV
 #define ROOT_POT_PIN 7 // pin for Root Note pot
 #define ROOT_CV_PIN 8 // pin for Root Note CV
-#define CLOCK_CV 9 // pin for clock input
 
 #define WAVEFORM_BUTTON 8 // Reset button
 
