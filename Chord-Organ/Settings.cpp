@@ -103,7 +103,9 @@ void Settings::read() {
 #endif
                 int spacePos = settingValue.indexOf(' ');
 
-                if(settingValue.startsWith("!WAVES")) {
+                if(settingValue.startsWith("!SEQ")) {
+                    sequencer = true;
+                } else if(settingValue.startsWith("!WAVES")) {
                     extraWaves = true;
                 } else if(settingValue.startsWith("!GLIDE")) {
                     glide = true;

@@ -2,10 +2,26 @@
 
 #include "Arduino.h"
 
+// SETUP VARS TO STORE CONTROLS
+// A separate variable for tracking clock CV for sequencer mode
+volatile boolean clockCVHigh = false;
+
+void clockcv() {
+  clockCVHigh = true;
+}
+
 void Interface::init(Settings* settings) {
 
+    sequencer = settings->sequencer;
+    
     analogReadRes(ADC_BITS);
     pinMode(WAVEFORM_BUTTON, INPUT);
+
+    if (sequencer) {
+      pinMode(CLOCK_CV_PIN, INPUT);
+      // Add an interrupt on CLOCK_CV_PIN to catch rising edges
+      attachInterrupt(CLOCK_CV_PIN, clockcv, RISING);
+    }
 
 	uint16_t bounceInterval = 5;
 	waveButtonBounce.attach(WAVEFORM_BUTTON);
@@ -51,7 +67,14 @@ uint16_t Interface::updateChordControls() {
 	chordCVInput.update();
 	chordPotInput.update();
 
-	chordIndex = (int) constrain(chordCVInput.currentValue + chordPotInput.currentValue, 0, chordCount - 1);
+  if (!sequencer) {
+    chordIndex = (int) constrain(chordCVInput.currentValue + chordPotInput.currentValue, 0, chordCount - 1);
+  } else {
+    if (clockCVHigh) {
+      chordIndex = (chordIndex + 1) % chordCount;
+      clockCVHigh = false;
+    }
+  }
 
 	uint16_t chordChanged = 0;
 

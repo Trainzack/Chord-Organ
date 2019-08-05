@@ -1,9 +1,12 @@
 #include "Arduino.h"
 #include "Trig.h"
 
-void Trig::init() {
+void Trig::init(boolean pulse_output) {
 	pinMode(TRIG_LED, OUTPUT);
-    pinMode(TRIG_CV, OUTPUT);
+    output_pulses = pulse_output;
+    if (output_pulses) {
+      pinMode(TRIG_CV, OUTPUT);
+    }
 }
 
 void Trig::led(boolean high) {
@@ -29,7 +32,10 @@ void Trig::out(boolean isHigh) {
 //		Serial.println("TRIG OUT");
 	}
 	pulseHigh = isHigh;
-	digitalWrite(TRIG_CV, isHigh ? HIGH : LOW);
+ 
+  if (output_pulses) {
+	  digitalWrite(TRIG_CV, isHigh ? HIGH : LOW);
+  }
 	led(isHigh);
 	if(isHigh) {
 		pulseOutTimer = 0;

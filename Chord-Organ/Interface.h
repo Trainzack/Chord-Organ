@@ -9,6 +9,7 @@
 #define CHORD_CV_PIN 6 // pin for Chord CV
 #define ROOT_POT_PIN 7 // pin for Root Note pot
 #define ROOT_CV_PIN 8 // pin for Root Note CV
+#define CLOCK_CV_PIN 9 // pin for Sequencer Clock Input
 
 #define WAVEFORM_BUTTON 8 // Reset button
 
@@ -32,6 +33,7 @@ class Interface {
 public:
 	boolean quantiseRootCV = true;
 	boolean quantiseRootPot = true;
+  boolean sequencer= false;
 
 	float rootNoteCV = 36;
 	float rootNotePot = 36;

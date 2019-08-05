@@ -15,6 +15,7 @@ class Settings {
 	boolean stacked = false;
     boolean extraWaves = false;
     boolean glide = false;
+    boolean sequencer = false;
     boolean quantiseRootCV = true;
     boolean quantiseRootPot = true;
 

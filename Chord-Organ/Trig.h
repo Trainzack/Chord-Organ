@@ -11,7 +11,7 @@ class Trig {
 		Trig() : trigCV(TRIG_CV,40) {
 
 		};
-		void init();
+		void init(boolean pulse_output);
 		void led(boolean high);
 		void out(boolean high);
 		void update();
@@ -21,7 +21,7 @@ class Trig {
 		elapsedMillis pulseOutTimer = 0;
 		uint32_t pulseTime = 10;
 		boolean pulseHigh = false;
-
+    boolean output_pulses = true;
 		boolean resetButton = false;
 		boolean resetCVRose = false;
 		elapsedMillis resetLedTimer = 0;

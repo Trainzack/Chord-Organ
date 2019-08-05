@@ -53,7 +53,6 @@ Serial.println("Starting");
     SPI.setSCK(14);
 
 	ledControl.init();
-    trig.init();
 
 #ifdef REQUIRE_SD_CARD
     openSDCard(true);
@@ -63,6 +62,7 @@ Serial.println("Starting");
 #endif
 
 
+    trig.init(!settings.sequencer);
     // Read waveform settings from EEPROM
     waveform = EEPROM.read(1234);
     if (waveform < 0) waveform = 0;
