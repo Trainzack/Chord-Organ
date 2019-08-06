@@ -57,7 +57,7 @@ void Sequence::read() {
 
 
     if (character == '[') {
-      if (numChords < 32 && numSequences > 0) {
+      if (numChords < MAX_SEQUENCE_CHORDS && numSequences > 0) {
         // Serial.println("Enter Chord");
         state = CHORD;
         continue;
@@ -130,7 +130,7 @@ void Sequence::read() {
 
     sequenceFile.print("Sequence #");
     sequenceFile.println((i + 1));
-    for (int j = 0; j < 32; j++) {
+    for (int j = 0; j < MAX_SEQUENCE_CHORDS; j++) {
       if (sequences[i][j][2] > 0) {
         sequenceFile.print("[");
         sequenceFile.print(sequences[i][j][0]);

@@ -105,7 +105,7 @@ void Interface::nextStep() {
     sequencePosition += 1;
 
     // Start at beginning of sequence
-    if (sequencePosition >= 32) {
+    if (sequencePosition >= 64) {
       sequencePosition = 0;
     }
     sequenceRoot = sequence->sequences[sequenceIndex][sequencePosition][0];
