@@ -28,47 +28,7 @@ void Sequence::init(boolean hasSD) {
 }
 
 void Sequence::copyDefaults() {
-  //TODO: Add better defaults
-  sequence_len[0] = 12;
-  int16_t seq[32][3] = {
-    {0, 3, 16},
-    {5, 3, 8},
-    {0, 3, 8},
-    {7, 1, 4},
-    {5, 3, 4},
-    {0, 3, 8},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-  };
-  for (int i = 0; i < 32; i++) {
-    for (int j = 0; j < 3; j++) {
-      sequences[0][i][j] = seq[i][j];
-    }
-  }
+  //TODO: Add defaults
 
 }
 
@@ -212,7 +172,7 @@ void Sequence::write() {
   sequenceFile.println("This file is used when !SEQ is set in CHORDORG.txt");
   sequenceFile.println("");
   sequenceFile.println("Edit chord sequences in the space below.");
-  sequenceFile.println("No more than 32 chords per sequence.");
+  sequenceFile.println("No more than 64 chords per sequence.");
   sequenceFile.println("No more than 16 sequences.");
   sequenceFile.println("Deliniate sequences with the !S marker.");
   sequenceFile.println("Anything outside the square brackets is ignored.");
