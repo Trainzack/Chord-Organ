@@ -1,4 +1,4 @@
-## Chord Organ Firmware V0.6
+## Chord Organ Sequencer Firmware V0.6.X
 
 ### Standard Features (No Configuration)
 
@@ -65,6 +65,12 @@ If a TUNING.SCL file exists on the SD card it will be used to define the CV / Kn
 NOTE : This will only work for inputs which are quantised, anything that uses FREEROOT will not be affected by the tuning file.
 
 Scala is available from the [Scala Website](http://www.huygens-fokker.org/scala/) where you can also find a collection of over 4500 scale files.
+
+##### Chord Sequence
+
+The module can be set to play a sequence of fixed chords, triggered by an input on the RESET/TRIGGER jack, via the !SEQ setting.
+
+This will generate another file on the SD card, `SEQUENCE.TXT`, which can be used to modify the sequence of chords played.
 
 ### Config Generator / Firmware Binary
 To generate a settings file and download the latest 
