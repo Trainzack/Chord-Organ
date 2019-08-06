@@ -8,6 +8,7 @@
 #include <EEPROM.h>
 
 #include "Settings.h"
+#include "Sequence.h"
 #include "Tuning.h"
 #include "Waves.h"
 #include "LedControl.h"
@@ -37,6 +38,7 @@ int waveformPages = 1;
 
 AudioEngine audioEngine;
 Settings settings("CHORDORG.TXT");
+Sequence sequence("SEQUENCE.TXT");
 Tuning tuning("TUNING.SCL");
 LedControl ledControl;
 Interface interface;
@@ -57,8 +59,15 @@ Serial.println("Starting");
 #ifdef REQUIRE_SD_CARD
     openSDCard(true);
     settings.init(true);
+    if (settings.sequencer) {
+      sequence.init(true);
+    }
 #else
-    settings.init(openSDCard(false));
+    boolean SDCardOpened = openSDCard(false);
+    settings.init(SDCardOpened);
+    if (settings.sequencer) {
+      sequence.init(SDCardOpened);
+    }
 #endif
 
 
@@ -76,7 +85,7 @@ Serial.println("Starting");
         waveform = 0;
     }
 
-    interface.init(&settings);
+    interface.init(&settings, &sequence);
     tuning.init();
 	audioEngine.init(&settings, tuning.createNoteMap(), waveform);
 
@@ -129,7 +138,7 @@ void loop(){
     }
 
     if (notesUpdate) {
-    	audioEngine.updateNotes(settings.notes[interface.chordIndex], interface.rootNoteCV);
+    	audioEngine.updateNotes(settings.notes[interface.chordIndex], interface.rootNoteCV + interface.sequenceRoot);
 
 		// Only glide if CV is quantised
         if(settings.glide && interface.quantiseRootCV) {

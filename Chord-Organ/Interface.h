@@ -3,6 +3,8 @@
 
 #include "AnalogInput.h"
 #include "Settings.h"
+#include "Sequence.h"
+
 #include <Bounce2.h>
 
 #define CHORD_POT_PIN 9 // pin for Chord pot
@@ -40,6 +42,15 @@ public:
 	float rootNote = 36;
 	int chordIndex = 0;
 
+  Sequence* sequence = 0;
+ 
+  int sequenceIndex = 0;
+  int sequencePosition = 0;
+  int sequenceRemainingSteps = 0;
+  int sequenceChord = 0;
+  int sequenceRoot = 0;
+  bool sequenceChanged = false;
+
 	Interface() :
 		rootCVInput  (ROOT_CV_PIN),
 		rootPotInput (ROOT_POT_PIN),
@@ -49,8 +60,9 @@ public:
 
 		}
 
-	void init(Settings* settings);
+	void init(Settings* settings, Sequence* _sequence);
 	uint16_t update();
+  void nextStep();
 	void setChordCount(int chordCount);
 
 private:
